@@ -1,0 +1,1106 @@
+
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Một chút kết nối, một chút chờ mong</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            min-height: 100vh;
+            padding: 70px 20px 30px;
+
+            color: white;
+            text-align: center;
+
+            background:
+                linear-gradient(
+                    rgba(5, 10, 25, 0.55),
+                    rgba(5, 10, 25, 0.72)
+                ),
+                url("background.jpg");
+
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+
+            overflow-x: hidden;
+        }
+
+
+        /* =========================
+           ÁNH SÁNG NỀN
+        ========================= */
+
+        body::before {
+            content: "";
+
+            position: fixed;
+
+            top: -250px;
+            left: 50%;
+
+            transform: translateX(-50%);
+
+            width: 700px;
+            height: 700px;
+
+            background: rgba(80, 170, 255, 0.18);
+
+            filter: blur(120px);
+
+            border-radius: 50%;
+
+            pointer-events: none;
+        }
+
+
+        /* =========================
+           PHẦN GIỚI THIỆU
+        ========================= */
+
+        .profile {
+            margin-bottom: 55px;
+
+            animation: appear 1s ease;
+        }
+
+
+        /* =========================
+           🔗 BIỂU TƯỢNG LIÊN KẾT
+        ========================= */
+
+        .profile-icon {
+            width: 100px;
+            height: 100px;
+
+            margin: 0 auto 22px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            border-radius: 50%;
+
+            font-size: 44px;
+
+            background: rgba(255, 255, 255, 0.12);
+
+            border: 1px solid rgba(255, 255, 255, 0.45);
+
+            backdrop-filter: blur(15px);
+
+            box-shadow:
+                0 15px 40px rgba(0, 0, 0, 0.4),
+                0 0 40px rgba(100, 180, 255, 0.18);
+
+            transition: 0.4s ease;
+        }
+
+
+        .profile-icon span {
+            display: inline-block;
+
+            animation:
+                linkMove 2s ease-in-out infinite;
+        }
+
+
+        @keyframes linkMove {
+
+            0% {
+                transform:
+                    rotate(-10deg)
+                    translateY(0);
+            }
+
+            50% {
+                transform:
+                    rotate(10deg)
+                    translateY(-4px);
+            }
+
+            100% {
+                transform:
+                    rotate(-10deg)
+                    translateY(0);
+            }
+        }
+
+
+        .profile-icon:hover {
+            transform: translateY(-6px) scale(1.05);
+
+            box-shadow:
+                0 20px 45px rgba(0, 0, 0, 0.45),
+                0 0 55px rgba(100, 180, 255, 0.3);
+        }
+
+
+        /* =========================
+           💌 TIÊU ĐỀ
+        ========================= */
+
+        h1 {
+            margin: 0 0 14px;
+
+            font-size: 48px;
+
+            letter-spacing: -1px;
+
+            background:
+                linear-gradient(
+                    90deg,
+                    #ffffff,
+                    #ffd6f6,
+                    #ff9de2,
+                    #b8e7ff,
+                    #ffffff
+                );
+
+            background-size: 300% auto;
+
+            -webkit-background-clip: text;
+            background-clip: text;
+
+            color: transparent;
+
+            animation:
+                titleColor 5s linear infinite;
+
+            text-shadow:
+                0 0 12px rgba(255, 160, 225, 0.35),
+                0 4px 15px rgba(0, 0, 0, 0.6);
+        }
+
+
+        @keyframes titleColor {
+
+            0% {
+                background-position: 0% center;
+            }
+
+            50% {
+                background-position: 100% center;
+            }
+
+            100% {
+                background-position: 0% center;
+            }
+        }
+
+
+        /* =========================
+           DÒNG MÔ TẢ
+        ========================= */
+
+        .description {
+            margin: 0;
+
+            font-size: 18px;
+
+            color: rgba(255, 255, 255, 0.78);
+
+            text-shadow:
+                0 2px 8px rgba(0, 0, 0, 0.7);
+        }
+
+
+        /* =========================
+           CÁC Ô MẠNG XÃ HỘI
+        ========================= */
+
+        #links {
+            display: flex;
+
+            justify-content: center;
+
+            align-items: flex-start;
+
+            gap: 22px;
+
+            flex-wrap: wrap;
+        }
+
+
+        .box {
+            position: relative;
+
+            width: 225px;
+
+            padding: 28px 20px;
+
+            border-radius: 22px;
+
+            border: 2px solid rgba(255, 255, 255, 0.9);
+
+            font-size: 22px;
+
+            font-weight: bold;
+
+            cursor: pointer;
+
+            overflow: hidden;
+
+            backdrop-filter: blur(18px);
+
+            box-shadow:
+                0 18px 40px rgba(0, 0, 0, 0.35),
+                0 0 12px rgba(255, 255, 255, 0.12),
+                inset 0 1px 1px rgba(255, 255, 255, 0.35);
+
+            transition:
+                transform 0.35s ease,
+                box-shadow 0.35s ease,
+                filter 0.35s ease;
+        }
+
+
+        .box:hover {
+            transform: translateY(-12px) scale(1.035);
+
+            filter: brightness(1.08);
+
+            box-shadow:
+                0 25px 50px rgba(0, 0, 0, 0.45),
+                0 0 22px rgba(255, 255, 255, 0.2),
+                inset 0 1px 2px rgba(255, 255, 255, 0.45);
+        }
+
+
+        .box::after {
+            content: "";
+
+            position: absolute;
+
+            top: 0;
+            left: 12%;
+
+            width: 76%;
+            height: 1px;
+
+            background: rgba(255, 255, 255, 0.8);
+
+            opacity: 0.8;
+        }
+
+
+        /* =========================
+           LOGO CHUNG
+        ========================= */
+
+        .social-icon {
+            width: 64px;
+            height: 64px;
+
+            margin: 0 auto 17px;
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            transition: 0.35s ease;
+        }
+
+
+        .box:hover .social-icon {
+            transform: translateY(-4px) scale(1.08);
+        }
+
+
+        /* =========================
+           FACEBOOK
+        ========================= */
+
+        .facebook-logo {
+            width: 62px;
+            height: 62px;
+
+            border-radius: 50%;
+
+            background: #1877f2;
+
+            display: flex;
+
+            align-items: flex-end;
+            justify-content: center;
+
+            overflow: hidden;
+
+            box-shadow:
+                0 8px 20px rgba(0, 0, 0, 0.25);
+        }
+
+
+        .facebook-logo span {
+            color: white;
+
+            font-family: Arial, sans-serif;
+
+            font-size: 58px;
+
+            font-weight: bold;
+
+            line-height: 0.9;
+
+            transform: translateY(7px);
+        }
+
+
+        /* =========================
+           INSTAGRAM
+        ========================= */
+
+        .instagram-logo {
+            width: 62px;
+            height: 62px;
+
+            border-radius: 17px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #833ab4,
+                    #fd1d1d,
+                    #fcb045
+                );
+
+            position: relative;
+
+            box-shadow:
+                0 8px 20px rgba(0, 0, 0, 0.25);
+        }
+
+
+        .instagram-logo::before {
+            content: "";
+
+            position: absolute;
+
+            width: 34px;
+            height: 34px;
+
+            left: 50%;
+            top: 50%;
+
+            transform: translate(-50%, -50%);
+
+            border: 4px solid white;
+
+            border-radius: 10px;
+        }
+
+
+        .instagram-logo::after {
+            content: "";
+
+            position: absolute;
+
+            width: 13px;
+            height: 13px;
+
+            left: 50%;
+            top: 50%;
+
+            transform: translate(-50%, -50%);
+
+            border: 4px solid white;
+
+            border-radius: 50%;
+
+            box-shadow:
+                14px -14px 0 -4px white;
+        }
+
+
+        /* =========================
+           ZALO
+        ========================= */
+
+        .zalo-logo {
+            width: 64px;
+            height: 64px;
+
+            border-radius: 17px;
+
+            background: white;
+
+            position: relative;
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            box-shadow:
+                0 8px 20px rgba(0, 0, 0, 0.25);
+
+            overflow: hidden;
+        }
+
+
+        .zalo-logo::before {
+            content: "";
+
+            position: absolute;
+
+            width: 62px;
+            height: 62px;
+
+            border-radius: 50%;
+
+            border-left: 7px solid #0068ff;
+
+            transform:
+                rotate(-30deg)
+                translate(-3px, 3px);
+        }
+
+
+        .zalo-logo span {
+            position: relative;
+
+            z-index: 2;
+
+            color: #0068ff;
+
+            font-size: 17px;
+
+            font-weight: bold;
+
+            letter-spacing: -1px;
+        }
+
+
+        /* =========================
+           LOCKET
+        ========================= */
+
+        .locket-logo {
+            width: 62px;
+            height: 62px;
+
+            border-radius: 17px;
+
+            background:
+                linear-gradient(
+                    145deg,
+                    #ffd84a,
+                    #ffb700
+                );
+
+            position: relative;
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            box-shadow:
+                0 8px 20px rgba(0, 0, 0, 0.25);
+        }
+
+
+        .locket-logo::before {
+            content: "♥";
+
+            color: white;
+
+            font-size: 34px;
+
+            line-height: 1;
+
+            text-shadow:
+                0 2px 5px rgba(0, 0, 0, 0.12);
+        }
+
+
+        /* =========================
+           MÀU CÁC Ô
+        ========================= */
+
+        .facebook {
+            background:
+                linear-gradient(
+                    145deg,
+                    rgba(24, 119, 242, 0.95),
+                    rgba(9, 78, 180, 0.92)
+                );
+        }
+
+
+        .instagram {
+            background:
+                linear-gradient(
+                    145deg,
+                    rgba(245, 96, 64, 0.95),
+                    rgba(193, 53, 132, 0.92)
+                );
+        }
+
+
+        .zalo {
+            background:
+                linear-gradient(
+                    145deg,
+                    rgba(0, 132, 255, 0.95),
+                    rgba(0, 82, 210, 0.92)
+                );
+        }
+
+
+        .locket {
+            background:
+                linear-gradient(
+                    145deg,
+                    rgba(255, 193, 35, 0.96),
+                    rgba(218, 139, 0, 0.94)
+                );
+        }
+
+
+        /* =========================
+           LINK
+        ========================= */
+
+        .box p {
+            font-size: 15px;
+
+            margin: 18px 0 0;
+
+            animation:
+                openLink 0.3s ease;
+        }
+
+
+        .box a {
+            color: white;
+
+            font-weight: normal;
+
+            text-decoration: none;
+
+            display: inline-block;
+
+            padding: 9px 16px;
+
+            border-radius: 10px;
+
+            background: rgba(255, 255, 255, 0.15);
+
+            border: 1px solid rgba(255, 255, 255, 0.3);
+
+            transition: 0.3s ease;
+        }
+
+
+        .box a:hover {
+            background: rgba(255, 255, 255, 0.25);
+
+            transform: translateY(-2px);
+        }
+
+
+        /* =========================
+           PARTICLE
+        ========================= */
+
+        .particle {
+            position: fixed;
+
+            width: 8px;
+            height: 8px;
+
+            border-radius: 50%;
+
+            pointer-events: none;
+
+            z-index: 9999;
+
+            animation:
+                particleFly 0.8s ease-out forwards;
+        }
+
+
+        @keyframes particleFly {
+
+            0% {
+                transform:
+                    translate(0, 0)
+                    scale(1);
+
+                opacity: 1;
+            }
+
+            100% {
+                transform:
+                    translate(var(--x), var(--y))
+                    scale(0);
+
+                opacity: 0;
+            }
+        }
+
+
+        /* =========================
+           FOOTER
+        ========================= */
+
+        .footer {
+            margin-top: 70px;
+
+            font-size: 14px;
+
+            color: rgba(255, 255, 255, 0.55);
+
+            letter-spacing: 0.5px;
+        }
+
+
+        /* =========================
+           ANIMATION
+        ========================= */
+
+        @keyframes appear {
+
+            from {
+                opacity: 0;
+
+                transform:
+                    translateY(25px);
+            }
+
+            to {
+                opacity: 1;
+
+                transform:
+                    translateY(0);
+            }
+        }
+
+
+        @keyframes openLink {
+
+            from {
+                opacity: 0;
+
+                transform:
+                    translateY(-5px);
+            }
+
+            to {
+                opacity: 1;
+
+                transform:
+                    translateY(0);
+            }
+        }
+
+
+        /* =========================
+           ĐIỆN THOẠI
+        ========================= */
+
+        @media (max-width: 700px) {
+
+            body {
+                padding-top: 50px;
+            }
+
+
+            h1 {
+                font-size: 35px;
+            }
+
+
+            .description {
+                font-size: 16px;
+            }
+
+
+            #links {
+                flex-direction: column;
+
+                align-items: center;
+
+                gap: 20px;
+            }
+
+
+            .box {
+                width: min(90%, 330px);
+            }
+
+        }
+
+    </style>
+</head>
+
+
+<body>
+
+
+    <!-- =========================
+         PHẦN GIỚI THIỆU
+    ========================= -->
+
+    <div class="profile">
+
+        <div class="profile-icon">
+            <span>🔗</span>
+        </div>
+
+        <h1>
+            💌 Một chút kết nối, một chút chờ mong
+        </h1>
+
+        <p class="description">
+            Dưới đây là link MXH của mình, mong có thể sớm nhận được phản hồi từ người đẹp ❤️❤️❤️
+        </p>
+
+    </div>
+
+
+
+    <!-- =========================
+         CÁC MẠNG XÃ HỘI
+    ========================= -->
+
+    <div id="links">
+
+
+        <!-- FACEBOOK -->
+
+        <div
+            class="box facebook"
+            onclick="toggleBox('facebook', this)"
+        >
+
+            <div class="social-icon">
+
+                <div class="facebook-logo">
+
+                    <span>f</span>
+
+                </div>
+
+            </div>
+
+            Facebook
+
+            <p
+                id="facebook"
+                style="display:none;"
+            >
+
+                <a
+                    href="https://facebook.com"
+                    target="_blank"
+                    onclick="event.stopPropagation()"
+                >
+                    Facebook của mình
+                </a>
+
+            </p>
+
+        </div>
+
+
+
+        <!-- INSTAGRAM -->
+
+        <div
+            class="box instagram"
+            onclick="toggleBox('instagram', this)"
+        >
+
+            <div class="social-icon">
+
+                <div class="instagram-logo"></div>
+
+            </div>
+
+            Instagram
+
+            <p
+                id="instagram"
+                style="display:none;"
+            >
+
+                <a
+                    href="https://instagram.com"
+                    target="_blank"
+                    onclick="event.stopPropagation()"
+                >
+                    Instagram của mình
+                </a>
+
+            </p>
+
+        </div>
+
+
+
+        <!-- ZALO -->
+
+        <div
+            class="box zalo"
+            onclick="toggleBox('zalo', this)"
+        >
+
+            <div class="social-icon">
+
+                <div class="zalo-logo">
+
+                    <span>Zalo</span>
+
+                </div>
+
+            </div>
+
+            Zalo
+
+            <p
+                id="zalo"
+                style="display:none;"
+            >
+
+                <a
+                    href="https://zalo.me"
+                    target="_blank"
+                    onclick="event.stopPropagation()"
+                >
+                    Zalo của mình
+                </a>
+
+            </p>
+
+        </div>
+
+
+
+        <!-- LOCKET -->
+
+        <div
+            class="box locket"
+            onclick="toggleBox('locket', this)"
+        >
+
+            <div class="social-icon">
+
+                <div class="locket-logo"></div>
+
+            </div>
+
+            Locket
+
+            <p
+                id="locket"
+                style="display:none;"
+            >
+
+                <a
+                    href="https://locket.com"
+                    target="_blank"
+                    onclick="event.stopPropagation()"
+                >
+                    Locket của mình
+                </a>
+
+            </p>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- =========================
+         FOOTER
+    ========================= -->
+
+    <div class="footer">
+
+        Made with ❤️ by me
+
+    </div>
+
+
+
+    <!-- =========================
+         JAVASCRIPT
+    ========================= -->
+
+    <script>
+
+        function toggleBox(boxName, boxElement) {
+
+            const currentBox =
+                document.getElementById(boxName);
+
+
+            const isOpen =
+                currentBox.style.display === "block";
+
+
+            document.getElementById("facebook")
+                .style.display = "none";
+
+
+            document.getElementById("instagram")
+                .style.display = "none";
+
+
+            document.getElementById("zalo")
+                .style.display = "none";
+
+
+            document.getElementById("locket")
+                .style.display = "none";
+
+
+            if (!isOpen) {
+
+                currentBox.style.display =
+                    "block";
+
+            }
+
+
+            createParticles(boxElement);
+
+        }
+
+
+
+        function createParticles(box) {
+
+            const rect =
+                box.getBoundingClientRect();
+
+
+            const centerX =
+                rect.left +
+                rect.width / 2;
+
+
+            const centerY =
+                rect.top +
+                rect.height / 2;
+
+
+            const colors = [
+
+                "#ffffff",
+                "#ffd700",
+                "#7dd3ff",
+                "#ff9de2"
+
+            ];
+
+
+            for (let i = 0; i < 24; i++) {
+
+                const particle =
+                    document.createElement("div");
+
+
+                particle.className =
+                    "particle";
+
+
+                particle.style.left =
+                    centerX + "px";
+
+
+                particle.style.top =
+                    centerY + "px";
+
+
+                particle.style.background =
+                    colors[
+                        Math.floor(
+                            Math.random() *
+                            colors.length
+                        )
+                    ];
+
+
+                const angle =
+                    Math.random() *
+                    Math.PI *
+                    2;
+
+
+                const distance =
+                    50 +
+                    Math.random() * 100;
+
+
+                const x =
+                    Math.cos(angle) *
+                    distance;
+
+
+                const y =
+                    Math.sin(angle) *
+                    distance;
+
+
+                particle.style.setProperty(
+                    "--x",
+                    x + "px"
+                );
+
+
+                particle.style.setProperty(
+                    "--y",
+                    y + "px"
+                );
+
+
+                const size =
+                    4 +
+                    Math.random() * 7;
+
+
+                particle.style.width =
+                    size + "px";
+
+
+                particle.style.height =
+                    size + "px";
+
+
+                document.body.appendChild(
+                    particle
+                );
+
+
+                setTimeout(() => {
+
+                    particle.remove();
+
+                }, 800);
+
+            }
+
+        }
+
+    </script>
+
+</body>
+
+</html>
+
